@@ -8,3 +8,5 @@ lab*/data/*
 !lab*/data/.gitkeep
 lab*/models/*
 !lab*/models/.gitkeep
+
+.env
