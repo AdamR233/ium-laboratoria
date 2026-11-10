@@ -1,7 +1,9 @@
+import os
 from pathlib import Path
 
 import joblib
 import pandas as pd
+from dotenv import load_dotenv
 from sklearn.datasets import load_wine
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, classification_report
@@ -10,9 +12,15 @@ from sklearn.model_selection import train_test_split
 # Ścieżki liczone względem katalogu lab01, niezależnie od miejsca uruchomienia skryptu
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-DATA_PATH = BASE_DIR / "data" / "wine.csv"
-TEST_SIZE = 0.2
-RANDOM_SEED = 42
+# Zadanie 6: konfiguracja wczytywana z pliku .env (drugi argument getenv to wartość domyślna)
+load_dotenv(BASE_DIR / ".env")
+
+DATA_PATH = BASE_DIR / os.getenv("DATA_PATH", "data/wine.csv")
+TEST_SIZE = float(os.getenv("TEST_SIZE", 0.2))
+RANDOM_SEED = int(os.getenv("RANDOM_SEED", 42))
+
+print("=== Konfiguracja z .env ===")
+print(f"DATA_PATH={DATA_PATH.relative_to(BASE_DIR)}, TEST_SIZE={TEST_SIZE}, RANDOM_SEED={RANDOM_SEED}\n")
 
 pd.set_option("display.max_columns", None)
 pd.set_option("display.width", 200)
