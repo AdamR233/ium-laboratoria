@@ -1,0 +1,17 @@
+Porównanie modeli na zbiorze wine (walidacja krzyżowa)
+
+Metryka                    scikit-learn     PyTorch        
+Accuracy CV (5-fold)       0.9887 ± 0.0138  0.9830 ± 0.0228
+F1 macro CV (5-fold)       0.9886 ± 0.0140  0.9829 ± 0.0233
+Czas treningu (1 model)    0.0069 s         0.4014 s       
+Czas walidacji (5 modeli)  0.0445 s         2.9373 s       
+Linie kodu modelu          12               47             
+
+Dokładność w poszczególnych foldach:
+Fold 1: sklearn = 1.0000, PyTorch = 1.0000
+Fold 2: sklearn = 0.9722, PyTorch = 0.9722
+Fold 3: sklearn = 1.0000, PyTorch = 1.0000
+Fold 4: sklearn = 0.9714, PyTorch = 0.9429
+Fold 5: sklearn = 1.0000, PyTorch = 1.0000
+
+Wniosek: Różnica średniej dokładności jest mniejsza niż odchylenie standardowe, więc oba modele radzą sobie porównywalnie. Trening sieci w PyTorch trwał około 58 razy dłużej i wymagał 47 linii kodu wobec 12 w scikit-learn (własna klasa sieci, pętla treningowa i ręczna walidacja krzyżowa). Dla małego zbioru tabelarycznego prostszy Pipeline scikit-learn jest wystarczający i wygodniejszy.
